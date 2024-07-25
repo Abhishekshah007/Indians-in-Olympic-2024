@@ -11,25 +11,7 @@ import { useRouter } from "next/navigation";
 
 export default function Pages() {
     const [view, setView] = useState("Athletes");
-    const history = useRouter();
-
-
-    useEffect(() => {
-        const checkSession = async () => {
-            try {
-                const sessionExists = localStorage.getItem("cookieFallback");
-
-                if (!sessionExists) {
-                    history.push("/backend/login");
-                }
-            } catch (error) {
-                console.error("Error checking session:", error);
-
-            }
-        };
-
-        checkSession();
-    }, [history]);
+   
 
     const renderView = () => {
         switch (view) {

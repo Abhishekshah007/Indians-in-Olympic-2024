@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import client from '@/appwrite/config';
 import { Account } from 'appwrite';
 import { useRouter } from "next/navigation";
@@ -10,8 +10,20 @@ export default function Page() {
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState(false);
 
-    const account = new Account(client);
+    const account =useMemo(() => new Account(client), []);
     const router = useRouter();
+
+    useEffect( () => {
+        const user =  account.get();
+        user.then((user) => {
+            if(user) {
+                router.push("/backend/dashboard");
+            }
+        })
+        
+
+
+    },[account, router]);
 
 
 
