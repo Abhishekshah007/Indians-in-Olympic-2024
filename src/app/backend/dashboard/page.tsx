@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Button } from "antd";
 import Athletes from "../athletes/Athletes";
 import Events from "../events/Events";
@@ -7,10 +7,25 @@ import Tally from "../tally/Tally";
 import Cards from "../breakingNews/cards/Cards";
 import Navbar from "@/component/Navbar";
 import { useRouter } from "next/navigation";
+import { Account } from "appwrite";
+import client from "@/appwrite/config";
 
 
 export default function Pages() {
     const [view, setView] = useState("Athletes");
+
+    const router = useRouter();
+
+    const account = useMemo(() => new Account(client), []);
+
+    useEffect(() => {
+        const user = account.get();
+        user.then((user) => {
+            if (!user) {
+                router.push("/backend/login");
+            }
+        });
+    }, [account, router]);
    
 
     const renderView = () => {
