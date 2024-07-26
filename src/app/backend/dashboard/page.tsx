@@ -19,12 +19,21 @@ export default function Pages() {
     const account = useMemo(() => new Account(client), []);
 
     useEffect(() => {
-        const user = account.get();
-        user.then((user) => {
-            if (!user) {
+        const fetchUser = async () => {
+            try {
+                const user = await account.get();
+                if (!user) {
+                    router.push("/backend/login");
+                }
+            } catch (error) {
+                console.error("Error fetching user:", error);
                 router.push("/backend/login");
+            } finally {
+                // Optional: any final cleanup or actions
             }
-        });
+        };
+    
+        fetchUser();
     }, [account, router]);
    
 
@@ -46,7 +55,8 @@ export default function Pages() {
     return (
         <div className="w-full flex flex-col items-center bg-black">
             <Navbar />
-            <div className="w-full flex justify-center m-6">
+            <div className="w-full flex justify-center gap-2">
+                <h1 className="text-3xl font-bold text-yellow-300 ">Dashboard </h1>
                 <Button type="primary" onClick={() => setView("Athletes")} className="mr-2">
                     Athletes
                 </Button>

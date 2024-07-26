@@ -115,14 +115,7 @@ export default function NoOfPlayers() {
                                 <Table.Column title="Discipline" dataIndex="Discipline" key="Discipline" width={150} />
                                 <Table.Column title="Is Out" dataIndex="IsOut" key="IsOut" width={100} render={(text, record: fetchPlayers) => (record.IsOut ? "Yes" : "No")} />
                                 <Table.Column title="Medal Type" dataIndex="MedalType" key="MedalType" width={150} />
-                                <Table.Column
-                                    title="Edit"
-                                    key="edit"
-                                    width={100}
-                                    render={(text, record: fetchPlayers) => (
-                                        <button className="bg-blue-500 text-white px-4 py-2 rounded">Edit</button>
-                                    )}
-                                />
+                              
                             </Table>
                         </div>
                         <div className="mt-4">

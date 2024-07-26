@@ -24,8 +24,9 @@ export default function EventBox({
                     <div className="flex flex-col text-white md:text-left md:ml-4">
                         <h4 className="text-2xl font-bold">{Discipline}</h4>
                         <p className="text-lg">{status}</p>
-                        <p className="text-sm">Today at {Time}</p>
+                        <p className="text-sm">Date {Time}</p>
                         <p className="text-sm">Result: {Result}</p>
+                        
                     </div>
                     <Image 
                         src={Opposition}

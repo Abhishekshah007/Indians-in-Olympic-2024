@@ -71,8 +71,8 @@ export default function Schedule() {
 
     return (
         <div className="max-w-4xl mx-auto bg-black p-8 shadow-lg rounded-lg my-4">
-            <h1 className="text-3xl font-bold mb-4 text-white ">Schedule</h1>
-            <DatePicker onChange={handleDateChange} className="mb-4 w-full" />
+            <h1 className="text-3xl font-bold mb-4 text-white">Schedule</h1>
+            <DatePicker onChange={handleDateChange} className="mb-4 p-2 w-full" />
             {error && (
                 <div className="mb-4 p-4 text-red-600 bg-red-100 rounded-lg">
                     {error}
@@ -88,34 +88,38 @@ export default function Schedule() {
                         <div className="text-white bg-black text-center">No events found for the selected date.</div>
                     ) : (
                         <ul className="space-y-4">
-                            {filteredEvents.map(event => (
-                                <li key={event.$id} className="bg-white p-4 rounded-lg shadow flex flex-col md:flex-row md:justify-between md:items-center">
-                                    <Image
-                                        src="/images/india.jpg"
-                                        alt="India"
-                                        className="w-full h-48 md:w-1/3 md:h-auto object-cover rounded-md shadow-md"
-                                    />
-                                    <div className="flex-1 mx-4 text-center">
-                                        <div className="text-gray-800 font-bold">{event.Discipline}</div>
-                                        <div className="text-gray-600">Status: {event.status}</div>
-                                        <div className="text-gray-600">Result: {event.Result}</div>
-                                        <div className="text-gray-600">Begins at: {dayjs(event.BeginsAt).format('MMMM D, YYYY')}</div>
-                                        <div className="text-gray-600">Time: {event.Time}</div>
+                        {filteredEvents.map(event => (
+                            <li key={event.$id} className={(event.status==="completed" || event.status==="Abandoned") ?"bg-red-500  p-4 rounded-lg shadow flex flex-col md:flex-row md:items-center":"bg-white p-4 rounded-lg shadow flex flex-col md:flex-row md:items-center"}>
+                                <Image
+                                    src="/images/india.jpg"
+                                    alt="India"
+                                    className="w-full h-48 md:w-1/3 md:h-auto object-cover rounded-md shadow-md"
+                                />
+                                <div className="flex-1 mx-4 my-4 md:my-0 text-center ">
+                                    <div className="text-2xl text-gray-800 font-bold">{event.Discipline}</div>
+                                    <div className="text-gray-600">Status: {event.status}</div>
+                                    <div className="text-gray-600">Result: {event.Result}</div>
+                                    <div className="text-gray-600">
+                                        Date: {dayjs(event.BeginsAt).format('MMMM D, YYYY')}
                                     </div>
-                                    <Image
-                                        src={event.Opposition || '/images/world.jpg'}
-                                        alt="Opposition"
-                                        className="w-full h-48 md:w-1/3 md:h-auto rounded-md shadow-md object-cover"
-                                        width={150}
-                                        height={150}
-                                    />
-
-                                </li>
-                            ))}
-                        </ul>
+                                    <div className="text-gray-600">Time: {event.Time}</div>
+                                </div>
+                                <Image
+                                    src={event.Opposition || '/images/world.jpg'}
+                                    alt="Opposition"
+                                    className="w-full h-48 md:w-1/3 md:h-auto object-fill rounded-md shadow-md"
+                                    width={150}
+                                    height={150}
+                                    style={{ marginLeft: "10px" }}
+                                />
+                            </li>
+                        ))}
+                    </ul>
+                    
                     )}
                 </div>
             )}
         </div>
+
     );
 }
