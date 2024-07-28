@@ -26,7 +26,7 @@ export default function Home() {
         <Blogs />
       </div>
       <div className="w-full mt-8">
-      <span className="text-white m-4">
+      <span className="text-white m-4 text-center">
                 Note: All the fields are related to India vs Other. For example, result: win means India wins.
             </span>
         <Schedule/>
