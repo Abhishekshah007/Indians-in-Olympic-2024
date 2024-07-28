@@ -115,7 +115,9 @@ export default function Schedule() {
                                                 description={
                                                     <div className="text-gray-600">
                                                         <div>Status: {event.status}</div>
-                                                        <div>Result: {event.Result}</div>
+                                                        <div className="bg-yellow-200 p-2 rounded-lg font-semibold text-center text-black">
+                                                            Result: {event.Result}
+                                                        </div>
                                                         <div>Date: {dayjs(event.BeginsAt).format('MMMM D, YYYY')}</div>
                                                         <div>Time: {event.Time}</div>
                                                     </div>

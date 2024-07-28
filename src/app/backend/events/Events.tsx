@@ -252,7 +252,8 @@ export default function Events() {
                                     { value: 'Disqualified', label: 'Disqualified' },
                                     { value: 'Abandoned', label: 'Abandoned' },
                                     { value: 'Waiting', label: 'Waiting' },
-                                    {value:'repechage',label:'Repechage'}
+                                    {value:'repechage',label:'Repechage'},
+                                    {value:'Win',label:'Win'},
                                 ]}
                             />
                         </div>
