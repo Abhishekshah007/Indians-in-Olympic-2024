@@ -23,7 +23,7 @@ interface FetchResponse {
     Discipline: string;
     status: string;
     Result: string;
-    BeginsAt: Date;
+    BeginsAt: string;
     Time: string;
 }
 
@@ -45,6 +45,8 @@ export default function Events() {
     const perPage = 25;
 
     const fetchEvents = async (page: number) => {
+        setIsLoaded(true);
+        setError(null);
         try {
             const db = new Databases(client);
             const response = await db.listDocuments(
@@ -59,7 +61,7 @@ export default function Events() {
                 Discipline: doc.Discipline,
                 status: doc.status,
                 Result: doc.Result,
-                BeginsAt: new Date(doc.BeginsAt),
+                BeginsAt: doc.BeginsAt,
                 Time: doc.Time
             }));
 
@@ -230,7 +232,8 @@ export default function Events() {
                                 options={[
                                     { value: 'upcoming', label: 'Upcoming' },
                                     { value: 'ongoing', label: 'Ongoing' },
-                                    { value: 'completed', label: 'Completed' }
+                                    { value: 'completed', label: 'Completed' },
+                                    { value: 'canceled', label: 'Canceled' }
                                 ]}
                             />
                         </div>
@@ -246,7 +249,10 @@ export default function Events() {
                                     { value: 'Bronze', label: 'Bronze' },
                                     { value: 'Out', label: 'Out' },
                                     { value: 'Qualified', label: 'Qualified' },
-                                    { value: 'Waiting', label: 'Waiting' }
+                                    { value: 'Disqualified', label: 'Disqualified' },
+                                    { value: 'Abandoned', label: 'Abandoned' },
+                                    { value: 'Waiting', label: 'Waiting' },
+                                    {value:'repechage',label:'Repechage'}
                                 ]}
                             />
                         </div>
@@ -284,6 +290,7 @@ export default function Events() {
                                     status={event.status}
                                     Result={event.Result}
                                     Time={event.Time}
+                                    BeginsAt={dayjs(event.BeginsAt).format('MMMM D, YYYY')}
                                 />
                                 <div className="space-x-2">
                                     <button

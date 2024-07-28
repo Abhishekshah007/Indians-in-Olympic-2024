@@ -8,6 +8,7 @@ interface EventBoxProps {
     status: string;
     Result: string;
     Time: string;
+    BeginsAt: string
 }
 
 export default function EventBox({
@@ -15,7 +16,8 @@ export default function EventBox({
     Discipline,
     status,
     Result,
-    Time
+    Time,
+    BeginsAt
 }: EventBoxProps) {
     return (
             <div className="max-w-4xl mx-auto bg-gray-800 p-8 shadow-lg rounded-lg my-4">
@@ -24,7 +26,8 @@ export default function EventBox({
                     <div className="flex flex-col text-white md:text-left md:ml-4">
                         <h4 className="text-2xl font-bold">{Discipline}</h4>
                         <p className="text-lg">{status}</p>
-                        <p className="text-sm">Date {Time}</p>
+                        <p className="text-sm">Date {BeginsAt}</p>
+                        <p className="text-sm">Time: {Time}</p>
                         <p className="text-sm">Result: {Result}</p>
                         
                     </div>

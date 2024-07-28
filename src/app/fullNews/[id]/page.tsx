@@ -44,7 +44,7 @@ export default function FullNews() {
     }
 
     return (
-        <div className="p-8 bg-gray-100 min-h-screen">
+        <div className="p-8 bg-black min-h-screen">
             <Navbar/>
             <div className="max-w-4xl mx-auto bg-white p-8 shadow-lg rounded-lg my-4">
                 <h1 className="text-3xl font-bold text-gray-900 mb-8">{news.Headline}</h1>
