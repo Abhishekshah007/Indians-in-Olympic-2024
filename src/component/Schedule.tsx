@@ -38,7 +38,7 @@ export default function Schedule() {
                 process.env.NEXT_PUBLIC_APPWRITE_EVENTS_COLLECTION_ID!,
                 [Query.limit(1000)]
             );
-
+    
             const transformedEvents: FetchResponse[] = response.documents.map((doc: any) => ({
                 $id: doc.$id,
                 Opposition: doc.Opposition,
@@ -48,9 +48,12 @@ export default function Schedule() {
                 BeginsAt: doc.BeginsAt,
                 Time: doc.Time
             }));
-
-            setEventList(transformedEvents);
-            setFilteredEvents(transformedEvents);
+    
+            // Sort events by BeginsAt date in descending order
+            const sortedEvents = transformedEvents.sort((a, b) => dayjs(a.BeginsAt).isBefore(dayjs(b.BeginsAt)) ? 1 : -1);
+    
+            setEventList(sortedEvents);
+            setFilteredEvents(sortedEvents);
         } catch (error: any) {
             console.error("Error fetching events:", error);
             setError("Failed to fetch events");
@@ -58,6 +61,8 @@ export default function Schedule() {
             setIsLoaded(false);
         }
     };
+    
+    
 
     const handleDateChange: DatePickerProps['onChange'] = (date) => {
         setSelectedDate(date);
@@ -68,6 +73,7 @@ export default function Schedule() {
             setFilteredEvents(eventList);
         }
     };
+    
 
     return (
         <div className="max-w-4xl mx-auto bg-gray-100 p-8 shadow-lg rounded-lg my-4">

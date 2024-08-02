@@ -233,7 +233,10 @@ export default function Events() {
                                     { value: 'upcoming', label: 'Upcoming' },
                                     { value: 'ongoing', label: 'Ongoing' },
                                     { value: 'completed', label: 'Completed' },
-                                    { value: 'canceled', label: 'Canceled' }
+                                    { value: 'canceled', label: 'Canceled' },
+                                    { value: 'abandoned', label: 'Abandoned' },
+                                    {value:'postponed',label:'Postponed'},
+
                                 ]}
                             />
                         </div>
@@ -254,6 +257,7 @@ export default function Events() {
                                     { value: 'Waiting', label: 'Waiting' },
                                     {value:'repechage',label:'Repechage'},
                                     {value:'Win',label:'Win'},
+                                    {value:'Lost',label:'Lost'},
                                 ]}
                             />
                         </div>
