@@ -267,27 +267,28 @@ export default function Athletes() {
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Edit</th>
                         </tr>
                     </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                        {currentBlogs.map((athlete, index) => (
-                            <tr key={index}>
-                                <td className="px-6 py-4 whitespace-nowrap">{athlete.Name}</td>
-                                <td className="px-6 py-4 whitespace-nowrap">
-                                    <Image src={athlete.Image} alt={athlete.Name} className="w-16 h-16 rounded-full" width={64} height={64} />
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap">{athlete.Discipline}</td>
-                                <td className="px-6 py-4 whitespace-nowrap">{athlete.IsOut ? "Yes" : "No"}</td>
-                                <td className="px-6 py-4 whitespace-nowrap">{athlete.MedalType}</td>
-                                <td className="px-6 py-4 whitespace-nowrap">
-                                    <button
-                                        onClick={() => handleEditClick(athlete)}
-                                        className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                                    >
-                                        Edit
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
+                  <tbody className="bg-white divide-y divide-gray-200">
+    {athleteList.slice((currentPage - 1) * perPage, currentPage * perPage).map((athlete, index) => (
+        <tr key={index}>
+            <td className="px-6 py-4 whitespace-nowrap">{athlete.Name}</td>
+            <td className="px-6 py-4 whitespace-nowrap">
+                <Image src={athlete.Image} alt={athlete.Name} className="w-16 h-16 rounded-full" width={64} height={64} />
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap">{athlete.Discipline}</td>
+            <td className="px-6 py-4 whitespace-nowrap">{athlete.IsOut ? "Yes" : "No"}</td>
+            <td className="px-6 py-4 whitespace-nowrap">{athlete.MedalType}</td>
+            <td className="px-6 py-4 whitespace-nowrap">
+                <button
+                    onClick={() => handleEditClick(athlete)}
+                    className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                    Edit
+                </button>
+            </td>
+        </tr>
+    ))}
+</tbody>
+
                 </table>
                 <div className="mt-4">
                     <Pagination
