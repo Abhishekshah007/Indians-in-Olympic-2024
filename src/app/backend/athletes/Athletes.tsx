@@ -210,7 +210,7 @@ export default function Athletes() {
                         <label htmlFor="IsOut" className="block text-sm font-medium text-gray-700">Is Out</label>
                         <Select
                             className="w-full mt-1"
-                            defaultValue={athletes.IsOut ? "true" : "false"}
+                            defaultValue="true"
                             onChange={(value) => handleSelectChange(value, "IsOut")}
                             options={[
                                 { value: 'true', label: 'True' },
@@ -224,6 +224,7 @@ export default function Athletes() {
                             className="w-full mt-1"
                             value={athletes.MedalType}
                             onChange={(value) => handleSelectChange(value, "MedalType")}
+                            defaultValue="None"
                             options={[
                                 { value: 'Gold', label: 'Gold' },
                                 { value: 'Silver', label: 'Silver' },
