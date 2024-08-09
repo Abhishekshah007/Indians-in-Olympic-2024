@@ -106,9 +106,13 @@ export default function Athletes() {
                 );
                 setSuccess(true);
                 setEditingAthlete(null);
-                setAthleteList((prevList) =>
-                    prevList.map((athlete) => (athlete.$id === editingAthlete.$id ? { ...athlete, ...athletes } : athlete))
-                );
+                setAthleteList((prevList) => {
+                    const updatedList = prevList.map((athlete) =>
+                        athlete.$id === editingAthlete.$id ? { ...athlete, ...athletes } : athlete
+                    );
+                    return [...updatedList]; 
+                });
+                
             } else {
                 const newAthlete = await db.createDocument(
                     process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!,

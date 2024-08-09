@@ -5,6 +5,7 @@ import client from "@/appwrite/config";
 import { Databases, Query } from 'appwrite';
 import { Carousel, Card, Image, Spin } from 'antd';
 import { useRouter } from 'next/navigation';
+import moment from 'moment';
 
 interface FetchResponse {
     $id: string;
@@ -13,6 +14,7 @@ interface FetchResponse {
     Image: string;
     PublishedAt: string;
 }
+
 const { Meta } = Card;
 
 export default function Blogs() {
@@ -21,7 +23,7 @@ export default function Blogs() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [success, setSuccess] = useState(false);
     const [blogs, setBlogs] = useState<FetchResponse[]>([]);
-   
+
     useEffect(() => {
         const fetchNews = async () => {
             try {
@@ -32,6 +34,7 @@ export default function Blogs() {
                     process.env.NEXT_PUBLIC_APPWRITE_BREAKING_NEWS_COLLECTION_ID!,
                     [Query.limit(1000)]
                 );
+
                 const transformedNews: FetchResponse[] = response.documents.map((doc: any) => ({
                     $id: doc.$id,
                     Headline: doc.Headline,
@@ -40,7 +43,10 @@ export default function Blogs() {
                     PublishedAt: doc.PublishedAt
                 }));
 
-                setBlogs(transformedNews);
+                // Sort blogs by PublishedAt date in descending order (newest first)
+                const sortedNews = transformedNews.sort((a, b) => new Date(b.PublishedAt).getTime() - new Date(a.PublishedAt).getTime());
+
+                setBlogs(sortedNews);
                 setSuccess(true);
             } catch (error: any) {
                 setError("Error occurred while fetching news");
@@ -73,7 +79,8 @@ export default function Blogs() {
                                 onClick={() => headToFullNews(news.$id)}
                             >
                                 <Meta 
-                                    title={news.Headline}
+                                    title={news.Headline} 
+                                    description={moment(news.PublishedAt).format('MMMM Do YYYY, h:mm:ss a')}
                                 />
                             </Card>
                         </div>
