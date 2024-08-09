@@ -1,6 +1,6 @@
 "use client";
 
-import { Select, Pagination,Image } from "antd";
+import { Select, Pagination, Image } from "antd";
 import { useState, useEffect } from "react";
 import client from "@/appwrite/config";
 import { Databases, ID, Query } from 'appwrite';
@@ -67,15 +67,9 @@ export default function Athletes() {
         fetchAthletes(currentPage);
     }, [currentPage]);
 
-    // Function to handle page change
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
     };
-
-    // Calculate pagination range
-    const indexOfLastBlog = currentPage * perPage;
-    const indexOfFirstBlog = indexOfLastBlog - perPage;
-    const currentBlogs = athleteList.slice(indexOfFirstBlog, indexOfLastBlog);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setAthletes({
@@ -124,6 +118,7 @@ export default function Athletes() {
                 setAthleteList((prevList) => [...prevList, newAthlete as unknown as FetchResponse]);
             }
 
+            // Reset form state after submit
             setAthletes({
                 Name: "",
                 Image: "",
