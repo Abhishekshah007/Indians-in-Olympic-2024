@@ -203,15 +203,15 @@ export default function Athletes() {
                     </div>
                     <div className="mb-6">
                         <label htmlFor="IsOut" className="block text-sm font-medium text-gray-700">Is Out</label>
-                        <Select
-                            className="w-full mt-1"
-                            defaultValue="true"
-                            onChange={(value) => handleSelectChange(value, "IsOut")}
-                            options={[
-                                { value: 'true', label: 'True' },
-                                { value: 'false', label: 'False' }
-                            ]}
-                        />
+                     <Select
+    className="w-full mt-1"
+    defaultValue="true" 
+    onChange={(value) => handleSelectChange(value, "IsOut")}
+    options={[
+        { value: 'true', label: 'True' },
+        { value: 'false', label: 'False' }
+    ]}
+/>
                     </div>
                     <div className="mb-6">
                         <label htmlFor="MedalType" className="block text-sm font-medium text-gray-700">Medal Type</label>
